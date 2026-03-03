@@ -32,6 +32,7 @@ DATABASE_URI = os.getenv(
 )
 BASE_URL = "/wishlists"
 
+
 ######################################################################
 #  T E S T   C A S E S
 ######################################################################
@@ -73,6 +74,19 @@ class TestYourResourceService(TestCase):
             test_wishlist.create()
             wishlists.append(test_wishlist)
         return wishlists
+    ######################################################################
+    #  H E L P E R   M E T H O D S
+    ######################################################################
+
+    def _create_wishlists(self, count):
+        """Factory method to create wishlists in bulk"""
+        wishlists = []
+        for _ in range(count):
+            wishlist = WishlistFactory()
+            wishlist.create()
+            wishlists.append(wishlist)
+        return wishlists
+
     ######################################################################
     #  P L A C E   T E S T   C A S E S   H E R E
     ######################################################################

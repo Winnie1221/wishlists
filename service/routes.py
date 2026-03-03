@@ -23,7 +23,7 @@ and Delete Wishlist
 
 from flask import jsonify, request, url_for, abort
 from flask import current_app as app  # Import Flask application
-from service.models import Wishlist
+from service.models import Wishlist, Item
 from service.common import status  # HTTP Status Codes
 
 
@@ -32,14 +32,23 @@ from service.common import status  # HTTP Status Codes
 ######################################################################
 @app.route("/")
 def index():
-    return jsonify(name="Wishlist Service", version="1.0"), status.HTTP_200_OK
+    """Root URL response"""
+    app.logger.info("Request for Root URL")
+    return (
+        jsonify(
+            name="Wishlist REST API Service",
+            version="1.0",
+            paths=url_for("list_wishlists", _external=True),
+        ),
+        status.HTTP_200_OK,
+    )
 
 
 ######################################################################
 #  R E S T   A P I   E N D P O I N T S
 ######################################################################
 
-# Todo: Place your REST API code here ...
+
 ######################################################################
 # DELETE A WISHLIST
 ######################################################################
